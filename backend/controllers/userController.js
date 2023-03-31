@@ -34,10 +34,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const registerUser = asyncHandler(async (req, res) => {
     // Destructurar el Body
-    let { name, email, password, isAdmin } = req.body;
+    let { name, email, password, isAdmin, isActive } = req.body;
     // Verificar que contenga el campo Admin y este sea True. Caso Contrario se asigna False
     if (!isAdmin) {
         isAdmin = false;
+    }
+    if (!isActive) {
+        isActive = true;
     }
     console.log(isAdmin);
     // Verificar que el Body contenga los datos necesarios
@@ -61,6 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         password: hashedPassword,
         isAdmin,
+        isActive,
     });
     // Mandamos la respueta de la funcion
     if (user) {
